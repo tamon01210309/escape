@@ -1,0 +1,29 @@
+@mixin pc {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+.pc {
+  @include sp {
+    display: none !important;
+  }
+}
+
+.sp {
+  @include pc {
+    display: none !important;
+  }
+}
+
+.logo {
+  width: 20%;
+  aspect-ratio: 500 / 200;
+  background: url(./images/days_logo.jpg) center / contain;
+}
