@@ -1,29 +1,36 @@
-@mixin pc {
-  @media screen and (min-width: 768px) {
-    @content;
-  }
-}
+.container {
+  position: relative;
+  top: 100px;
+  right: 0;
+  left: 0;
+  width: 450px;
+  margin: 0 auto;
 
-@mixin sp {
-  @media screen and (max-width: 767px) {
-    @content;
+  .key-room,
+  .safe-room,
+  .wood-room,
+  .piano-room {
+    border: solid 4px black;
+    position: absolute;
+    display: none;
   }
-}
 
-.pc {
-  @include sp {
-    display: none !important;
+  .display {
+    display: block;
   }
-}
 
-.sp {
-  @include pc {
-    display: none !important;
+  .left {
+    position: absolute;
+    left: 9px;
+    top: 240px;
+    width: 15%;
+    transform:rotate(180deg);
   }
-}
 
-.logo {
-  width: 20%;
-  aspect-ratio: 500 / 200;
-  background: url(./images/days_logo.jpg) center / contain;
+  .right {
+    position: absolute;
+    right: 0;
+    top: 240px;
+    width: 15%;
+  }
 }
