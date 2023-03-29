@@ -75,10 +75,19 @@ right.addEventListener('click', function () {
     }
     showMessage("")
 })
+
+let timeoutId: NodeJS.Timeout | undefined;
+
 function showMessage(text) {
     const message = document.querySelector(".message")
     message!.textContent = `${text}`
-    setTimeout(() => message!.textContent = "", 3000)
+    if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        message!.textContent = ""
+        timeoutId = undefined;
+    }, 3000)
 }
 
 //鍵部屋の処理
