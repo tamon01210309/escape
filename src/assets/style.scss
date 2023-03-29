@@ -1,6 +1,6 @@
 .container {
   position: relative;
-  top: 100px;
+  top: 45px;
   right: 0;
   left: 0;
   width: 450px;
@@ -13,10 +13,140 @@
     border: solid 4px black;
     position: absolute;
     display: none;
+
+    &-img {
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  .key-room {
+    .key-hole {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      // background-color: black;
+      top: 270px;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+    }
+  }
+
+  .wood-room {
+    .vase {
+      position: absolute;
+      width: 142px;
+      left: 148px;
+      bottom: 47px;
+      z-index: 2;
+    }
+
+    .board {
+      position: absolute;
+      width: 100px;
+      height: 71px;
+      left: 168px;
+      bottom: 93px;
+      z-index: 1;
+    }
+
+    .hint {
+      display: none;
+      z-index: 3;
+      left: 41px;
+      bottom: 100px;
+      position: absolute;
+      width: 367px;
+    }
+
+    .wood-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 3;
+      display: none;
+    }
+
+  }
+
+  .piano-room {
+    .piano {
+      position: absolute;
+      width: 248px;
+      height: 230px;
+      left: 89px;
+      bottom: 93px;
+      z-index: 1;
+    }
+
+    .keyboard {
+      left: 42px;
+      top: 221px;
+      position: absolute;
+      z-index: 3;
+      width: 362px;
+      display: none;
+    }
+
+    .piano-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 3;
+      display: none;
+    }
+  }
+
+  .safe-room {
+    form {
+      position: absolute;
+      display: none;
+      left: 100px;
+      bottom: 135px;
+      width: 90%;
+      z-index: 2;
+
+      input {
+        width: 50%;
+        border: 2px solid;
+        background-color: white;
+      }
+
+      button {
+        width: 10%;
+        border: 2px solid;
+        background-color: white;
+        text-align: center;
+      }
+    }
+
+    .safe {
+      position: absolute;
+      width: 143px;
+      height: 100px;
+      bottom: 207px;
+      left: 184px;
+    }
+
+    .safe-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 1;
+      display: none;
+    }
+
   }
 
   .display {
-    display: block;
+    display: block !important;
   }
 
   .left {
@@ -24,7 +154,7 @@
     left: 9px;
     top: 240px;
     width: 15%;
-    transform:rotate(180deg);
+    transform: rotate(180deg);
   }
 
   .right {
@@ -32,5 +162,16 @@
     right: 0;
     top: 240px;
     width: 15%;
+  }
+
+  .message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -630px;
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
 }
