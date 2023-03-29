@@ -50,7 +50,7 @@ function moveToWoodRoom() {
 
 let whereYouAreNow = room.key
 
-left.addEventListener('click', function () {
+left.addEventListener('click', () => {
     if (whereYouAreNow == room.key) {
         moveToWoodRoom()
     } else if (whereYouAreNow == room.wood) {
@@ -60,10 +60,11 @@ left.addEventListener('click', function () {
     } else if (whereYouAreNow == room.piano) {
         moveToKeyRoom()
     }
-    showMessage("")
+    const message = document.querySelector(".message")
+    message!.innerHTML = ""
 })
 
-right.addEventListener('click', function () {
+right.addEventListener('click', () => {
     if (whereYouAreNow == room.key) {
         moveToPianoRoom()
     } else if (whereYouAreNow == room.wood) {
@@ -73,32 +74,42 @@ right.addEventListener('click', function () {
     } else if (whereYouAreNow == room.piano) {
         moveToSafeRoom()
     }
-    showMessage("")
+    const message = document.querySelector(".message")
+    message!.innerHTML = ""
 })
 
 let timeoutId: NodeJS.Timeout | undefined;
 
 function showMessage(text) {
     const message = document.querySelector(".message")
-    message!.textContent = `${text}`
+    message!.innerHTML = `${text}`
     if (timeoutId) {
         clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        message!.textContent = ""
+    }
+    timeoutId = setTimeout(() => {
+        if (!haveKey) {
+            message!.textContent = ""
+        }
         timeoutId = undefined;
     }, 3000)
 }
 
 //鍵部屋の処理
 const keyHole = document.querySelector(".key-hole")!
-keyHole.addEventListener('click', function () {
-    showMessage("鍵穴から誰かがのぞいている")
+const hatiware = document.querySelector('.hatiware') as HTMLElement
+keyHole.addEventListener('click', () => {
+    if (!haveKey) {
+        showMessage("鍵穴から誰かがのぞいている")
+    } else {
+        const message = document.querySelector(".message")
+        message!.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
+        hatiware.classList.add("display")
+    }
 })
 
 //木の部屋の処理
 const vase = document.querySelector('.vase') as HTMLElement
-vase.addEventListener('click', function () {
+vase.addEventListener('click', () => {
     showMessage("この壺はどこかで見た事がある")
 })
 let isDragging = false
@@ -145,6 +156,7 @@ const woodBlack = document.querySelector('.wood-black') as HTMLElement
 board.addEventListener('click', () => {
     hint.classList.add("display")
     woodBlack.classList.add("display")
+    showMessage("落書きだ、何のヒントにもならない")
 })
 woodBlack.addEventListener('click', () => {
     hint.classList.remove("display")
