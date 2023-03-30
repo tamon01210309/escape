@@ -1,6 +1,13 @@
 //部屋を移動する処理
 const left = document.querySelector(".left")!
 const right = document.querySelector(".right")!
+const rooms = {
+    keyRoom: document.querySelector(".key-room")!,
+    pianoRoom: document.querySelector(".piano-room")!,
+    safeRoom: document.querySelector(".safe-room")!,
+    woodRoom: document.querySelector(".wood-room")!
+}
+
 enum room {
     key,
     piano,
@@ -8,89 +15,86 @@ enum room {
     wood
 }
 
-function moveToKeyRoom() {
-    document.querySelector(".key-room")!.classList.add("display")
-    const rooms = document.querySelectorAll(".piano-room,.safe-room,.wood-room")!
-    rooms.forEach(room => {
-        room.classList.remove("display")
-    }
-    )
-    whereYouAreNow = room.key
-}
-
-function moveToPianoRoom() {
-    document.querySelector(".piano-room")!.classList.add("display")
-    const rooms = document.querySelectorAll(".key-room,.safe-room,.wood-room")!
-    rooms.forEach(room => {
-        room.classList.remove("display")
-    }
-    )
-    whereYouAreNow = room.piano
-}
-
-function moveToSafeRoom() {
-    document.querySelector(".safe-room")!.classList.add("display")
-    const rooms = document.querySelectorAll(".piano-room,.key-room,.wood-room")!
-    rooms.forEach(room => {
-        room.classList.remove("display")
-    }
-    )
-    whereYouAreNow = room.safe
-}
-
-function moveToWoodRoom() {
-    document.querySelector(".wood-room")!.classList.add("display")
-    const rooms = document.querySelectorAll(".piano-room,.safe-room,.key-room")!
-    rooms.forEach(room => {
-        room.classList.remove("display")
-    }
-    )
-    whereYouAreNow = room.wood
+function deleteDisplayAllRooms() {
+    Object.values(rooms).forEach(room => {
+        room!.classList.remove("display")
+    })
 }
 
 let whereYouAreNow = room.key
 
+function moveToRoom(roomName: string) {
+    deleteDisplayAllRooms()
+    rooms[roomName].classList.add("display")
+    switch (roomName) {
+        case "keyRoom":
+            whereYouAreNow = room.key
+            break
+        case "pianoRoom":
+            whereYouAreNow = room.piano
+            break
+        case "safeRoom":
+            whereYouAreNow = room.safe
+            break
+        case "woodRoom":
+            whereYouAreNow = room.wood
+            break
+        default:
+            break
+    }
+}
+
 left.addEventListener('click', () => {
-    if (whereYouAreNow == room.key) {
-        moveToWoodRoom()
-    } else if (whereYouAreNow == room.wood) {
-        moveToSafeRoom()
-    } else if (whereYouAreNow == room.safe) {
-        moveToPianoRoom()
-    } else if (whereYouAreNow == room.piano) {
-        moveToKeyRoom()
+    switch (whereYouAreNow) {
+        case room.key:
+            moveToRoom("woodRoom")
+            break
+        case room.wood:
+            moveToRoom("safeRoom")
+            break
+        case room.safe:
+            moveToRoom("pianoRoom")
+            break
+        case room.piano:
+            moveToRoom("keyRoom")
+            break
     }
     const message = document.querySelector(".message")
     message!.innerHTML = ""
 })
 
 right.addEventListener('click', () => {
-    if (whereYouAreNow == room.key) {
-        moveToPianoRoom()
-    } else if (whereYouAreNow == room.wood) {
-        moveToKeyRoom()
-    } else if (whereYouAreNow == room.safe) {
-        moveToWoodRoom()
-    } else if (whereYouAreNow == room.piano) {
-        moveToSafeRoom()
+    switch(whereYouAreNow) {
+        case room.key:
+            moveToRoom("pianoRoom")
+            break
+        case room.wood:
+            moveToRoom("keyRoom")
+            break
+        case room.safe:
+            moveToRoom("woodRoom")
+            break
+        case room.piano:
+            moveToRoom("safeRoom")
+            break
     }
     const message = document.querySelector(".message")
     message!.innerHTML = ""
 })
 
-let timeoutId: NodeJS.Timeout | undefined;
+let timeoutId: NodeJS.Timeout | undefined
 
 function showMessage(text) {
     const message = document.querySelector(".message")
     message!.innerHTML = `${text}`
     if (timeoutId) {
-        clearTimeout(timeoutId);
+        clearTimeout(timeoutId)
     }
     timeoutId = setTimeout(() => {
         if (!haveKey) {
             message!.textContent = ""
         }
-        timeoutId = undefined;
+        timeoutId = undefined
     }, 3000)
 }
 
@@ -197,7 +201,7 @@ let haveKey = false
 function checkAnswer() {
     const correctAnswer = "5856"
     const answerInput = document.getElementById("answer") as HTMLInputElement
-    let answer = answerInput.value;
+    let answer = answerInput.value
     if (answer === correctAnswer) {
         showMessage("中には鍵が入っていた。鍵を入手した")
         form.classList.remove("display")
@@ -209,4 +213,3 @@ function checkAnswer() {
     }
     return false
 }
-
