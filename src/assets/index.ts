@@ -82,19 +82,19 @@ right.addEventListener('click', () => {
     message.innerHTML = ""
 })
 
-let timeoutId: NodeJS.Timeout | undefined
+let showMessageTaskId: NodeJS.Timeout | undefined
 
 function showMessage(text) {
     const message = document.querySelector(".message")!
     message.innerHTML = `${text}`
-    if (timeoutId) {
-        clearTimeout(timeoutId)
+    if (showMessageTaskId) {
+        clearTimeout(showMessageTaskId)
     }
-    timeoutId = setTimeout(() => {
+    showMessageTaskId = setTimeout(() => {
         if (!haveKey) {
             message.textContent = ""
         }
-        timeoutId = undefined
+        showMessageTaskId = undefined
     }, 3000)
 }
 
@@ -116,11 +116,11 @@ const vase = document.querySelector('.vase') as HTMLElement
 vase.addEventListener('click', () => {
     showMessage("この壺はどこかで見た事がある")
 })
-let isDragging = false
+let vaseIsDragging = false
 let startPosition = { x: 0, y: 0 }
 let currentPositon = { x: 0, y: 0 }
 vase.addEventListener('mousedown', (event: MouseEvent) => {
-    isDragging = true
+    vaseIsDragging = true
     startPosition = {
         x: event.clientX - vase.offsetLeft,
         y: event.clientY - vase.offsetTop
@@ -128,7 +128,7 @@ vase.addEventListener('mousedown', (event: MouseEvent) => {
 })
 
 vase.addEventListener('mousemove', (event: MouseEvent) => {
-    if (isDragging) {
+    if (vaseIsDragging) {
         event.preventDefault()
         currentPositon = {
             x: event.clientX - startPosition.x,
@@ -146,12 +146,12 @@ vase.addEventListener('mousemove', (event: MouseEvent) => {
 })
 
 vase.addEventListener('mouseup', () => {
-    isDragging = false
+    vaseIsDragging = false
     showMessage("")
 })
 
 vase.addEventListener('mouseleave', () => {
-    isDragging = false
+    vaseIsDragging = false
 })
 
 const board = document.querySelector('.board') as HTMLElement
