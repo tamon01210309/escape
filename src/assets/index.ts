@@ -59,8 +59,8 @@ left.addEventListener('click', () => {
             moveToRoom("keyRoom")
             break
     }
-    const message = document.querySelector(".message")
-    message!.innerHTML = ""
+    const message = document.querySelector(".message")!
+    message.innerHTML = ""
 })
 
 right.addEventListener('click', () => {
@@ -78,21 +78,21 @@ right.addEventListener('click', () => {
             moveToRoom("safeRoom")
             break
     }
-    const message = document.querySelector(".message")
-    message!.innerHTML = ""
+    const message = document.querySelector(".message")!
+    message.innerHTML = ""
 })
 
 let timeoutId: NodeJS.Timeout | undefined
 
 function showMessage(text) {
-    const message = document.querySelector(".message")
-    message!.innerHTML = `${text}`
+    const message = document.querySelector(".message")!
+    message.innerHTML = `${text}`
     if (timeoutId) {
         clearTimeout(timeoutId)
     }
     timeoutId = setTimeout(() => {
         if (!haveKey) {
-            message!.textContent = ""
+            message.textContent = ""
         }
         timeoutId = undefined
     }, 3000)
@@ -105,8 +105,8 @@ keyHole.addEventListener('click', () => {
     if (!haveKey) {
         showMessage("鍵穴から誰かがのぞいている")
     } else {
-        const message = document.querySelector(".message")
-        message!.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
+        const message = document.querySelector(".message")!
+        message.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
         hatiware.classList.add("display")
     }
 })
