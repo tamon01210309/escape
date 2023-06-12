@@ -17,7 +17,7 @@ enum room {
 
 function deleteDisplayAllRooms() {
     Object.values(rooms).forEach(room => {
-        room!.classList.remove("display")
+        room.classList.remove("display")
     })
 }
 
