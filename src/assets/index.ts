@@ -1,6 +1,6 @@
 //部屋を移動する処理
-const left = document.querySelector(".left")!
-const right = document.querySelector(".right")!
+const left = document.getElementById("left")!
+const right = document.getElementById("right")!
 const rooms: { [key: string]: HTMLElement } = {
   keyRoom: document.querySelector(".key-room")!,
   pianoRoom: document.querySelector(".piano-room")!,
