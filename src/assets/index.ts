@@ -127,42 +127,35 @@ const vase = document.querySelector('.vase') as HTMLElement
 vase.addEventListener('click', () => {
   showMessage("この壺はどこかで見た事がある")
 })
-let vaseIsDragging = false
-let startPosition = { x: 0, y: 0 }
-let currentPositon = { x: 0, y: 0 }
+let startPosition: { x: number } | undefined
+let currentPosition = { x: 0 }
 vase.addEventListener('mousedown', (event: MouseEvent) => {
-  vaseIsDragging = true
   startPosition = {
-    x: event.clientX - vase.offsetLeft,
-    y: event.clientY - vase.offsetTop
+    x: event.clientX - vase.offsetLeft
   }
 })
 
 vase.addEventListener('mousemove', (event: MouseEvent) => {
-  if (vaseIsDragging) {
+  if (startPosition) {
     event.preventDefault()
-    currentPositon = {
-      x: event.clientX - startPosition.x,
-      y: event.clientY - startPosition.y
+    currentPosition = {
+      x: event.clientX - startPosition.x
     }
 
-    if (currentPositon.x < 0) {
-      currentPositon.x = 0
-    } else if (currentPositon.x > 450 - vase.offsetWidth) {
-      currentPositon.x = 450 - vase.offsetWidth
-    }
+    currentPosition.x = Math.max(currentPosition.x, 0)
+    currentPosition.x = Math.min(currentPosition.x, 450 - vase.offsetWidth)
 
-    vase.style.left = currentPositon.x + 'px'
+    vase.style.left = `${currentPosition.x}px`
   }
 })
 
 vase.addEventListener('mouseup', () => {
-  vaseIsDragging = false
+  startPosition = undefined
   showMessage("")
 })
 
 vase.addEventListener('mouseleave', () => {
-  vaseIsDragging = false
+  startPosition = undefined
 })
 
 const board = document.querySelector('.board') as HTMLElement
