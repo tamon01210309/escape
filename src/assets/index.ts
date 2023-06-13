@@ -8,11 +8,11 @@ const rooms = {
     woodRoom: document.querySelector(".wood-room")!
 }
 
-enum room {
-    key,
-    piano,
-    safe,
-    wood
+enum Room {
+    Key,
+    Piano,
+    Safe,
+    Wood
 }
 
 function deleteDisplayAllRooms() {
@@ -21,23 +21,23 @@ function deleteDisplayAllRooms() {
     })
 }
 
-let whereYouAreNow = room.key
+let whereYouAreNow = Room.Key
 
 function moveToRoom(roomName: string) {
     deleteDisplayAllRooms()
     rooms[roomName].classList.add("display")
     switch (roomName) {
         case "keyRoom":
-            whereYouAreNow = room.key
+            whereYouAreNow = Room.Key
             break
         case "pianoRoom":
-            whereYouAreNow = room.piano
+            whereYouAreNow = Room.Piano
             break
         case "safeRoom":
-            whereYouAreNow = room.safe
+            whereYouAreNow = Room.Safe
             break
         case "woodRoom":
-            whereYouAreNow = room.wood
+            whereYouAreNow = Room.Wood
             break
         default:
             break
@@ -46,16 +46,16 @@ function moveToRoom(roomName: string) {
 
 left.addEventListener('click', () => {
     switch (whereYouAreNow) {
-        case room.key:
+        case Room.Key:
             moveToRoom("woodRoom")
             break
-        case room.wood:
+        case Room.Wood:
             moveToRoom("safeRoom")
             break
-        case room.safe:
+        case Room.Safe:
             moveToRoom("pianoRoom")
             break
-        case room.piano:
+        case Room.Piano:
             moveToRoom("keyRoom")
             break
     }
@@ -65,16 +65,16 @@ left.addEventListener('click', () => {
 
 right.addEventListener('click', () => {
     switch(whereYouAreNow) {
-        case room.key:
+        case Room.Key:
             moveToRoom("pianoRoom")
             break
-        case room.wood:
+        case Room.Wood:
             moveToRoom("keyRoom")
             break
-        case room.safe:
+        case Room.Safe:
             moveToRoom("woodRoom")
             break
-        case room.piano:
+        case Room.Piano:
             moveToRoom("safeRoom")
             break
     }
