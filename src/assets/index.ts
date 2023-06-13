@@ -23,6 +23,8 @@ function deleteDisplayAllRooms() {
 
 let whereYouAreNow = Room.Key
 
+let message = document.querySelector(".message")!
+
 function moveToRoom(roomName: string) {
     deleteDisplayAllRooms()
     rooms[roomName].classList.add("display")
@@ -44,6 +46,10 @@ function moveToRoom(roomName: string) {
     }
 }
 
+function messageReset(){
+  message.innerHTML = ""
+}
+
 left.addEventListener('click', () => {
     switch (whereYouAreNow) {
         case Room.Key:
@@ -59,8 +65,7 @@ left.addEventListener('click', () => {
             moveToRoom("keyRoom")
             break
     }
-    const message = document.querySelector(".message")!
-    message.innerHTML = ""
+    messageReset()
 })
 
 right.addEventListener('click', () => {
@@ -78,8 +83,6 @@ right.addEventListener('click', () => {
             moveToRoom("safeRoom")
             break
     }
-    const message = document.querySelector(".message")!
-    message.innerHTML = ""
 })
 
 let showMessageTaskId: NodeJS.Timeout | undefined
@@ -102,12 +105,12 @@ function showMessage(text) {
 const keyHole = document.querySelector(".key-hole")!
 const hatiware = document.querySelector('.hatiware') as HTMLElement
 keyHole.addEventListener('click', () => {
-    if (!haveKey) {
-        showMessage("鍵穴から誰かがのぞいている")
+    if (haveKey) {
+      const message = document.querySelector(".message")!
+      message.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
+      hatiware.classList.add("display")
     } else {
-        const message = document.querySelector(".message")!
-        message.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
-        hatiware.classList.add("display")
+        showMessage("鍵穴から誰かがのぞいている")
     }
 })
 
