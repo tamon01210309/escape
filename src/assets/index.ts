@@ -1,7 +1,7 @@
 //部屋を移動する処理
 const left = document.querySelector(".left")!
 const right = document.querySelector(".right")!
-const rooms = {
+const rooms : {[key:string]:HTMLElement}= {
     keyRoom: document.querySelector(".key-room")!,
     pianoRoom: document.querySelector(".piano-room")!,
     safeRoom: document.querySelector(".safe-room")!,
@@ -16,8 +16,8 @@ enum Room {
 }
 
 function deleteDisplayAllRooms() {
-    Object.values(rooms).forEach(room => {
-        room.classList.remove("display")
+    Object.values(rooms).forEach((room:HTMLElement) => {
+      hide(room)
     })
 }
 
@@ -27,7 +27,7 @@ let message = document.querySelector(".message")!
 
 function moveToRoom(roomName: string) {
     deleteDisplayAllRooms()
-    rooms[roomName].classList.add("display")
+    display(rooms[roomName])
     switch (roomName) {
         case "keyRoom":
             whereYouAreNow = Room.Key
@@ -48,6 +48,14 @@ function moveToRoom(roomName: string) {
 
 function messageReset(){
   message.innerHTML = ""
+}
+
+function display(element:HTMLElement){
+  element.classList.add("display")
+}
+
+function hide(element:HTMLElement){
+  element.classList.remove("display")
 }
 
 left.addEventListener('click', () => {
@@ -108,7 +116,7 @@ keyHole.addEventListener('click', () => {
     if (haveKey) {
       const message = document.querySelector(".message")!
       message.innerHTML = "「もしかして、クリアしたってこと！？」<br>鍵穴から覗いていたのは奇妙な生き物だった"
-      hatiware.classList.add("display")
+      display(hatiware)
     } else {
         showMessage("鍵穴から誰かがのぞいている")
     }
@@ -161,13 +169,13 @@ const board = document.querySelector('.board') as HTMLElement
 const hint = document.querySelector('.hint') as HTMLElement
 const woodBlack = document.querySelector('.wood-black') as HTMLElement
 board.addEventListener('click', () => {
-    hint.classList.add("display")
-    woodBlack.classList.add("display")
+    display(hint)
+    display(woodBlack)
     showMessage("落書きだ、何のヒントにもならない")
 })
 woodBlack.addEventListener('click', () => {
-    hint.classList.remove("display")
-    woodBlack.classList.remove("display")
+    hide(hint)
+    hide(woodBlack)
 })
 
 //ピアノの部屋の処理
@@ -175,13 +183,13 @@ const piano = document.querySelector('.piano') as HTMLElement
 const keyboard = document.querySelector('.keyboard') as HTMLElement
 const pianoBlack = document.querySelector('.piano-black') as HTMLElement
 piano.addEventListener('click', () => {
-    keyboard.classList.add("display")
-    pianoBlack.classList.add("display")
+    display(keyboard)
+    display(pianoBlack)
     showMessage("どうみてもただの落書きだ")
 })
 pianoBlack.addEventListener('click', () => {
-    keyboard.classList.remove("display")
-    pianoBlack.classList.remove("display")
+    hide(keyboard)
+    hide(pianoBlack)
 })
 
 //金庫部屋の処理
@@ -190,14 +198,14 @@ const form = document.querySelector('.form') as HTMLElement
 const safeBlack = document.querySelector('.safe-black') as HTMLElement
 safe.addEventListener('click', () => {
     if (!haveKey) {
-        form.classList.add("display")
-        safeBlack.classList.add("display")
+        display(form)
+        display(safeBlack)
         showMessage("この中には鍵が入っている気がする")
     }
 })
 safeBlack.addEventListener('click', () => {
-    form.classList.remove("display")
-    safeBlack.classList.remove("display")
+    hide(form)
+    hide(safeBlack)
 })
 
 let haveKey = false
@@ -207,8 +215,8 @@ function checkAnswer() {
     let answer = answerInput.value
     if (answer === correctAnswer) {
         showMessage("中には鍵が入っていた。鍵を入手した")
-        form.classList.remove("display")
-        safeBlack.classList.remove("display")
+        hide(form)
+        hide(safeBlack)
         haveKey = true
     } else {
         showMessage("違うようだ")
