@@ -215,5 +215,4 @@ function checkAnswer() {
     showMessage("違うようだ")
     answerInput.value = ""
   }
-  return false
 }

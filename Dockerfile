@@ -1,6 +1,6 @@
 FROM nginx
 
-COPY  nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir -p /var/log/app_engine
 RUN mkdir -p /usr/share/nginx/www/_ah && \

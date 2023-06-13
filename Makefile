@@ -11,6 +11,3 @@ docker/build:
 docker/push:
 	docker tag pj-escape:latest asia.gcr.io/days-cw/pj-escape:latest
 	docker push asia.gcr.io/days-cw/pj-escape:latest
-	
-	set -x PATH $HOME/.dotnet/tools $PATH
-	set -x PATH $HOME/.dotnet/tools $PATH
