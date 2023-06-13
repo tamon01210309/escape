@@ -1,29 +1,184 @@
-@mixin pc {
-  @media screen and (min-width: 768px) {
-    @content;
-  }
-}
+.container {
+  position: relative;
+  top: 45px;
+  right: 0;
+  left: 0;
+  width: 450px;
+  margin: 0 auto;
 
-@mixin sp {
-  @media screen and (max-width: 767px) {
-    @content;
-  }
-}
+  .key-room,
+  .safe-room,
+  .wood-room,
+  .piano-room {
+    border: solid 4px black;
+    position: absolute;
+    display: none;
 
-.pc {
-  @include sp {
-    display: none !important;
+    &-img {
+      user-select: none;
+      pointer-events: none;
+    }
   }
-}
 
-.sp {
-  @include pc {
-    display: none !important;
+  .key-room {
+    .hatiware{
+      position: absolute;
+      width: 113%;
+      left: -24px;
+      top: -17px;
+      z-index: 1;
+      display: none;
+    }
+    .key-hole {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 270px;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+    }
   }
-}
 
-.logo {
-  width: 20%;
-  aspect-ratio: 500 / 200;
-  background: url(./images/days_logo.jpg) center / contain;
+  .wood-room {
+    .vase {
+      position: absolute;
+      width: 142px;
+      left: 148px;
+      bottom: 47px;
+      z-index: 2;
+    }
+
+    .board {
+      position: absolute;
+      width: 100px;
+      height: 71px;
+      left: 168px;
+      bottom: 93px;
+      z-index: 1;
+    }
+
+    .hint {
+      display: none;
+      z-index: 3;
+      left: 41px;
+      bottom: 100px;
+      position: absolute;
+      width: 367px;
+    }
+
+    .wood-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 3;
+      display: none;
+    }
+
+  }
+
+  .piano-room {
+    .piano {
+      position: absolute;
+      width: 248px;
+      height: 230px;
+      left: 89px;
+      bottom: 93px;
+      z-index: 1;
+    }
+
+    .keyboard {
+      left: 42px;
+      top: 221px;
+      position: absolute;
+      z-index: 3;
+      width: 362px;
+      display: none;
+    }
+
+    .piano-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 3;
+      display: none;
+    }
+  }
+
+  .safe-room {
+    form {
+      position: absolute;
+      display: none;
+      left: 100px;
+      bottom: 135px;
+      width: 90%;
+      z-index: 2;
+
+      input {
+        width: 50%;
+        border: 2px solid;
+        background-color: white;
+      }
+
+      button {
+        width: 10%;
+        border: 2px solid;
+        background-color: white;
+        text-align: center;
+      }
+    }
+
+    .safe {
+      position: absolute;
+      width: 143px;
+      height: 100px;
+      bottom: 207px;
+      left: 184px;
+    }
+
+    .safe-black {
+      position: absolute;
+      width: 451px;
+      height: 582px;
+      background-color: black;
+      opacity: 0.6;
+      z-index: 1;
+      display: none;
+    }
+
+  }
+
+  .display {
+    display: block !important;
+  }
+
+  .left {
+    position: absolute;
+    left: 9px;
+    top: 240px;
+    width: 15%;
+    transform: rotate(180deg);
+  }
+
+  .right {
+    position: absolute;
+    right: 0;
+    top: 240px;
+    width: 15%;
+  }
+
+  .message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -630px;
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
 }
